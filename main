@@ -1,0 +1,19 @@
+#!/bin/bash
+#PBS -l nodes=1:ppn=8:dc2,walltime=0:15:00
+#PBS -N binvolvol
+#PBS -V
+
+module load singularity 2> /dev/null
+
+singularity exec -e docker://brainlife/dipy:0.13 ./main.py
+#singularity exec -e docker://nipype/nipype ./main.py
+
+if [ -s volumes.json ] 
+then
+	echo 0 > finished
+else
+	echo "failed"
+	echo 1 > finished
+	exit 1
+fi
+
