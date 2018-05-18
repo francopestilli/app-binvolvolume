@@ -16,8 +16,8 @@ with open('config.json') as config_json:
     config = json.load(config_json)
     
 
-asegstatsfile = config["fsurfer"]+"/stats/aseg.stats"
-asegstatsfile = open("aseg.stats", 'r')
+#asegstatsfile = config["fsurfer"]+"/stats/aseg.stats"
+asegstatsfile = open(config["fsurfer"]+"/stats/aseg.stats", 'r')
 lines =  asegstatsfile.readlines()
 icv = float(lines[34][84:98]) 
 
