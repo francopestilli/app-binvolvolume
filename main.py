@@ -16,7 +16,15 @@ with open('config.json') as config_json:
     config = json.load(config_json)
     
 
+asegstatsfile = config["fsurfer"]+"/stats/aseg.stats"
+asegstatsfile = open("aseg.stats", 'r')
+lines =  asegstatsfile.readlines()
+icv = float(lines[34][84:98]) 
+
+
 volumes = {}
+volumes_ICVprop = {}
+volumes_ICVprop['eTIV'] = icv
 
 for file in glob.glob(config["maskdir"] + "/*Vol.nii.gz"):
     tractname = file[0:-11]
@@ -26,6 +34,10 @@ for file in glob.glob(config["maskdir"] + "/*Vol.nii.gz"):
     num_vox = np.sum(binvol.get_data() > 0)
     vol = voxelvol*num_vox
     volumes[tractname] = vol
+    volumes_ICVprop[tractname] = vol/icv
 
 with open('volumes.json', 'w') as f:
     f.write(json.dumps(volumes, indent=4))
+    
+with open('volumes_icvproportion.json', 'w') as f:
+    f.write(json.dumps(volumes_ICVprop, indent=4))
