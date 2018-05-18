@@ -9,6 +9,7 @@ import numpy as np
 import nibabel as nib
 import glob
 import json
+import os
 
 
 
@@ -27,7 +28,7 @@ volumes_ICVprop = {}
 volumes_ICVprop['eTIV'] = icv
 
 for file in glob.glob(config["maskdir"] + "/*Vol.nii.gz"):
-    tractname = file[0:-11]
+    tractname = os.path.basename(file)[0:-11]
     binvol = nib.load(file)
     header = binvol.header
     voxelvol = header.get_zooms()[0]*header.get_zooms()[1]*header.get_zooms()[2]
