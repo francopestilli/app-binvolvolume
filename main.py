@@ -11,18 +11,18 @@ import glob
 import json
 import os
 
-
-
 with open('config.json') as config_json:
     config = json.load(config_json)
     
-
-#asegstatsfile = config["fsurfer"]+"/stats/aseg.stats"
 asegstatsfile = open(config["fsurfer"]+"/stats/aseg.stats", 'r')
-lines =  asegstatsfile.readlines()
-icv = float(lines[34][84:98]) 
-
-
+for line in asegstatsfile.readlines():
+    #parse something like
+    ## Measure EstimatedTotalIntraCranialVol, eTIV, Estimated Total Intracranial Volume, 1430034.963222, mm^3
+    if line.startswith("# Measure EstimatedTotalIntraCranialVol"):
+	v = line.split(",")[3]
+	icv = float(v.strip())
+        print "parsed EstimatedTotalIntraCranialVol", icv
+		
 volumes = {}
 volumes_ICVprop = {}
 volumes_ICVprop['eTIV'] = icv
