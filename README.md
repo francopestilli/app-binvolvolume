@@ -1,5 +1,5 @@
 [![Abcdspec-compliant](https://img.shields.io/badge/ABCD_Spec-v1.1-green.svg)](https://github.com/brain-life/abcd-spec)
-[![Run on Brainlife.io](https://img.shields.io/badge/Brainlife-bl.app.1-blue.svg)](https://doi.org/10.25663/bl.app.1)
+[![Run on Brainlife.io](https://img.shields.io/badge/Brainlife-bl.app.32-blue.svg)](https://doi.org/10.25663/bl.app.32)
 
 # app-binvolvolume
 This service computes the volume of binary nifti images and reads the eTIV (estimated total intracranial volume aka icv) from freesurfer (http://freesurfer.net/fswiki/eTIV). It saves down the raw volumes (volumes.json) as well as the proportion of ICV (volumes_icvproportion.json) for each image (volume normalized by eTIV - vol/eTIV).
