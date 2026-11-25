@@ -2,6 +2,36 @@
 [![Run on Brainlife.io](https://img.shields.io/badge/Brainlife-bl.app.32-blue.svg)](https://doi.org/10.25663/bl.app.32)
 
 # app-binvolvolume
+
+<!-- brainlife-app:begin (generated from the App manifest; edit the manifest, not this block) -->
+
+> **Computes the volume of each binary tract mask and its proportion of FreeSurfer estimated total intracranial volume (eTIV), saved as JSON.**
+
+Reads eTIV from the FreeSurfer stats/aseg.stats file, counts non-zero voxels in every *Vol.nii.gz mask in the input directory, multiplies by voxel volume and writes volumes.json (mm^3) and volumes_icvproportion.json (volume/eTIV). Use it to quantify tract volumes normalised for head size.
+
+| | |
+|---|---|
+| 📥 **Inputs** | `neuro/freesurfer` · `neuro/tractmasks` |
+| 📤 **Outputs** | `raw` |
+| 🐳 **Container** | `brainlife/dipy:0.13` |
+| ⚙️ **Resources** | 8 CPUs · 0.25 h walltime |
+| 🔗 **Run it** | [doi.org/10.25663/bl.app.32](https://doi.org/10.25663/bl.app.32) |
+
+#### 📥 Inputs
+
+| Input | Datatype | Required | Description |
+|---|---|---|---|
+| `fsurfer` | `neuro/freesurfer` | yes | FreeSurfer subject directory used for eTIV. Must contain stats/aseg.stats. |
+| `vols` | `neuro/tractmasks` | yes | Directory of binary tract masks. Only files ending in Vol.nii.gz are measured. |
+
+#### 📤 Outputs
+
+| Output | Datatype | Description |
+|---|---|---|
+| `output` | `raw` | volumes.json (volume per mask in mm^3) and volumes_icvproportion.json (volume divided by eTIV, plus eTIV). |
+
+<!-- brainlife-app:end -->
+
 This service computes the volume of binary nifti images and reads the eTIV (estimated total intracranial volume aka icv) from freesurfer (http://freesurfer.net/fswiki/eTIV). It saves down the raw volumes (volumes.json) as well as the proportion of ICV (volumes_icvproportion.json) for each image (volume normalized by eTIV - vol/eTIV).
 
 ### Author
